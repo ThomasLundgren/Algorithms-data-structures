@@ -1,51 +1,94 @@
 package se.hig.aod.lab2;
 
 /**
- * A linked list of arbitrary size that stores objects.
+ * A linked list of arbitrary size that stores objects. Objects kan be inserted and removed
+ * from any position in the list.
  * @author Thomas Lundgren
  *
- * @param <T> the type of objects stored in the list.
+ * @param <E> elements stored in the list.
  */
 
-public class LinkedList<T> implements List<T> {
+public class LinkedList<E> implements ExtendedList<E> {
 	private ListNode head = null;
 	private int size = 0;
 	
+	/**
+	 * Creates a linked list.
+	 */
 	public LinkedList() {}
 
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public void insert(E e, int index) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public E get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void clear() {
 		head = null;
 		size = 0;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int numberOfElements() {
 		return size;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void insertFirst(T t) {
-		if(t == null) {
+	public void insertFirst(E e) {
+		if(e == null) {
 			throw new NullReferenceException("A null object cannot be inserted into a LinkedList!");
 		}
 		else {
-			ListNode newFirstNode = new ListNode(t);
+			ListNode newFirstNode = new ListNode(e);
 			newFirstNode.next = head;
 			head = newFirstNode;
 			size++;
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public void insertLast(T t) {
-		if(t == null) {
+	public void insertLast(E e) {
+		if(e == null) {
 			throw new NullReferenceException("A null object cannot be inserted into a LinkedList!");
 		}
 		else {
-			ListNode insertedNode = new ListNode(t);
+			ListNode insertedNode = new ListNode(e);
 			if(this.isEmpty()) {
-				insertFirst(t);
+				insertFirst(e);
 			}
 			else {
 				getLastNode().next = insertedNode;
@@ -55,8 +98,11 @@ public class LinkedList<T> implements List<T> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public T removeFirst() {
+	public E removeFirst() {
 		if(!this.isEmpty()) {
 			ListNode removedHead = head;
 			head = head.next;
@@ -68,11 +114,14 @@ public class LinkedList<T> implements List<T> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public T removeLast() {
+	public E removeLast() {
 		if(!this.isEmpty()) {
 			ListNode removedNode = getLastNode();
-			T objectToReturn = removedNode.heldObject;
+			E objectToReturn = removedNode.heldObject;
 			
 			size--;
 			if(removedNode == head)
@@ -86,8 +135,11 @@ public class LinkedList<T> implements List<T> {
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public T getFirst() throws MyListEmptyException {
+	public E getFirst() throws MyListEmptyException {
 		if(!this.isEmpty()) {
 			return head.heldObject;
 		}
@@ -96,8 +148,11 @@ public class LinkedList<T> implements List<T> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public T getLast() {
+	public E getLast() {
 		if(!this.isEmpty()) {
 			return getLastNode().heldObject;
 		}
@@ -106,13 +161,16 @@ public class LinkedList<T> implements List<T> {
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public boolean contains(T t) {
-		if(!this.isEmpty() && t != null) {
+	public boolean contains(E e) {
+		if(!this.isEmpty() && e != null) {
 			ListNode currentNode = head;
 			
 			for (int i = 0; i < size; i++) {
-				if(currentNode.heldObject.equals(t)) {
+				if(currentNode.heldObject.equals(e)) {
 					return true;
 				}
 				currentNode = currentNode.next;
@@ -122,11 +180,17 @@ public class LinkedList<T> implements List<T> {
 		return false;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void printList() {
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void printListR() {
 		String formattedString = allNodesToString(head);
@@ -134,12 +198,18 @@ public class LinkedList<T> implements List<T> {
 		System.out.print(formattedString);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void reversePrintList() {
 		// TODO Auto-generated method stub
 		
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean isEmpty() {
 		return (head == null);
@@ -173,11 +243,11 @@ public class LinkedList<T> implements List<T> {
 	}
 	
 	private class ListNode {
-		private T heldObject = null;
+		private E heldObject = null;
 		private ListNode next = null;
 		
-		private ListNode(T t) {
-			heldObject = t;
+		private ListNode(E e) {
+			heldObject = e;
 		}
 	}
 }
