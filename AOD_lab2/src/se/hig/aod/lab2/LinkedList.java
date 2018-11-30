@@ -6,7 +6,7 @@ public class LinkedList<T> implements List<T> {
 	private int numberOfNodes;
 
 	public LinkedList() {
-		
+
 	}
 
 	@Override
@@ -125,12 +125,16 @@ public class LinkedList<T> implements List<T> {
 		ListNode temp = head;
 
 		while(temp.next != null) {
+			if(checkIsNull(t, temp.data))
+				return true;
 			if(temp.data.equals(t))
 				return true;
 			temp = temp.next;
 		}
 
-		if(getLast().equals(t))
+		if(checkIsNull(t, temp.data))
+			return true;
+		else if(getLast().equals(t))
 			return true;
 		else
 			return false;
@@ -143,7 +147,7 @@ public class LinkedList<T> implements List<T> {
 		ListNode temp = head;
 		while(temp != null){
 
-			System.out.println(temp.data);
+			System.out.print(temp.data + " ");
 			temp = temp.next;
 
 		}
@@ -158,6 +162,20 @@ public class LinkedList<T> implements List<T> {
 	@Override
 	public void reversePrintList() {
 		head.printRecursiveReverse(head);
+	}
+
+	private boolean checkIsNull(T t) {
+		if(t == null)
+			return true;
+		else
+			return false;
+	}
+
+	private boolean checkIsNull(T t, T u) {
+		if(t == null && u == null)
+			return true;
+		else
+			return false;
 	}
 
 	//Inner class
@@ -175,7 +193,10 @@ public class LinkedList<T> implements List<T> {
 			if(listNode == null)
 				return;
 
-			System.out.println(listNode.data.toString());
+			if(checkIsNull(listNode.data))
+				System.out.println("null ");
+			else
+				System.out.println(listNode.data.toString() + " ");
 			listNode = listNode.next;
 			printRecursive(listNode);
 
@@ -187,7 +208,10 @@ public class LinkedList<T> implements List<T> {
 				return;
 
 			printRecursiveReverse(listNode.next);
-			System.out.println(listNode.data.toString());
+			if(checkIsNull(listNode.data))
+				System.out.println("null ");
+			else
+				System.out.print(listNode.data.toString() + " ");
 
 		}
 
