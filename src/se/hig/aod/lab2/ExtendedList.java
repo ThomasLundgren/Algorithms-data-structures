@@ -3,7 +3,7 @@ package se.hig.aod.lab2;
 /**
  * An interface for a list. This interface extends the {@link List} interface. It adds
  * the capabilities to insert, remove and fetch elements at any position in the list.
- * @author thoma
+ * @author Thomas Lundgren, Niklas Nordgren
  *
  * @param <E>
  */
