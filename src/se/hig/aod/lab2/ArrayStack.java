@@ -4,10 +4,10 @@ package se.hig.aod.lab2;
  * The {@code ArrayStack} class is a data structure that contains objects. Objects are added and removed
  * in LIFO-order (Last in, first out).
  * 
+ * @param <E> The type of elements in this {@code ArrayStack}.
  * @author Thomas Lundgren, Niklas Nordgren
  * @version 1.0.0
- * @since 2018-11-30
- * @param <E> The type of elements in this {@code ArrayStack}.
+ * @since 1.0.0
  */
 
 public class ArrayStack<E> implements Stack<E> {
@@ -17,8 +17,8 @@ public class ArrayStack<E> implements Stack<E> {
 	private E[] array;
 	
 	/**
-	 * Creates an {@codeArrayStack} object.
-	 * @param stackMaxSize The maximum number of objects that the {@codeArrayStack} can hold.
+	 * Creates an {@code ArrayStack} object.
+	 * @param stackMaxSize The maximum number of objects that the {@code ArrayStack} can hold.
 	 */
 	public ArrayStack(int stackMaxSize) {
 		this.maxSize = stackMaxSize;
@@ -86,7 +86,7 @@ public class ArrayStack<E> implements Stack<E> {
 	}
 	
 	/**
-	 * Checks if the {@codeArrayStack} is full.
+	 * Checks if the {@code ArrayStack} is full.
 	 * @return {@code true} if the {@code ArrayStack} is full, otherwise {@code false}.
 	 */
 	public boolean isFull() {

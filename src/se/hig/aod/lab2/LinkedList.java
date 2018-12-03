@@ -3,7 +3,9 @@ package se.hig.aod.lab2;
 /**
  * A linked list of arbitrary size that stores objects. Objects kan be inserted and removed
  * from any position in the list.
- * @author Thomas Lundgren
+ * @author Thomas Lundgren, Niklas Nordgren
+ * @version 1.0.0
+ * @since 1.0.0
  *
  * @param <E> elements stored in the list.
  */
@@ -16,14 +18,24 @@ public class LinkedList<E> implements ExtendedList<E> {
 	 * Creates a linked list.
 	 */
 	public LinkedList() {}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
 	public void insert(E e, int index) {
-		// TODO Auto-generated method stub
-		
+		if(index == 0) {
+			insertFirst(e);
+		}
+		else {
+			ListNode tempNode = getListNode(index - 1);
+			if(tempNode == null) {
+				throw new IndexOutOfBoundsException("The specified index is out of bounds!");
+			}
+			ListNode newNode = new ListNode(e);
+			newNode.next = tempNode.next;
+			tempNode.next = newNode;
+		}
 	}
 
 	/**
@@ -31,8 +43,28 @@ public class LinkedList<E> implements ExtendedList<E> {
 	 */
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.isEmpty()) {
+			throw new MyListEmptyException("The list is empty!");
+		}
+		ListNode tempNode = getListNode(index - 1);
+		E objectToReturn;
+		
+		if(index == 0) {
+			objectToReturn = removeFirst();
+		}
+		else if(index == size - 1) {
+			objectToReturn = tempNode.next.heldObject;
+			tempNode.next = null;
+		}
+		else if(tempNode == null || tempNode.next == null) {
+			throw new IndexOutOfBoundsException("The specified index is out of bounds!");
+		}
+		else {
+			objectToReturn = tempNode.next.heldObject;
+			tempNode.next = tempNode.next.next;
+		}
+		
+		return objectToReturn;
 	}
 
 	/**
@@ -40,8 +72,15 @@ public class LinkedList<E> implements ExtendedList<E> {
 	 */
 	@Override
 	public E get(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.isEmpty()) {
+			throw new MyListEmptyException("The list is empty!");
+		}
+		ListNode listNodeAtIndex = getListNode(index);
+		if(listNodeAtIndex == null) {
+			throw new IndexOutOfBoundsException("The specified index is out of bounds!");
+		}
+		E object = listNodeAtIndex.heldObject;
+		return object;
 	}
 	
 	/**
@@ -213,6 +252,25 @@ public class LinkedList<E> implements ExtendedList<E> {
 	@Override
 	public boolean isEmpty() {
 		return (head == null);
+	}
+	
+	private ListNode getListNode(int index) {
+		ListNode searchedNode = head;
+		if(index < 0) {
+			searchedNode = null;
+		}
+		else {
+			for (int i = 0; i < index; i++) {
+				if(searchedNode.next != null) {
+					searchedNode = searchedNode.next;
+				}
+				else {
+					searchedNode = null;
+					break;
+				}
+			}
+		}
+		return searchedNode;
 	}
 	
 	private ListNode getLastNode() {
